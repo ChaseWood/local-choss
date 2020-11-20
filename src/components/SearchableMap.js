@@ -26,18 +26,20 @@ const SearchableMap = (props) => {
 			...viewport,
 			...newViewport,
 		});
-		props.handleCoords(viewport);
+		// props.handleCoords(viewport.latitude, viewport.longitude);
 	};
 
 	const handleOnResult = (event) => {
+		props.handleCoords(event.result.center[0], event.result.center[1]);
+		console.log('this is handleOnResult', event);
 		setSearchResultsLayer(
 			new GeoJsonLayer({
 				id: 'search-result',
 				data: event.result.geometry,
-				getFillColor: [255, 0, 0, 128],
+				getFillColor: [0, 48, 68, 0],
 				getRadius: 1000,
-				pointRadiusMinPixels: 10,
-				pointRadiusMaxPixels: 10,
+				pointRadiusMinPixels: 500,
+				pointRadiusMaxPixels: 600,
 			})
 		);
 	};

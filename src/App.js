@@ -10,14 +10,19 @@ function App() {
 	// const url = `https://www.mountainproject.com/data/get-routes-for-lat-lon?lat=40.03&lon=-105.25&maxDistance=10&minDiff=5.6&maxDiff=5.10&key=${apiKey}`;
 	const url = 'http://localhost:3000/climbs';
 
-	const [locations, setLocations] = useState([]);
+	const [locations, setLocations] = useState({
+		latitude: null,
+		longitude: null,
+	});
+
 	const [climbs, setClimbs] = useState([]);
 
-	// useEffect(() => {
-	// 	fetch('url/#{locations.latitude}/#{locations.longitude}')
-	// 		.then((res) => res.json())
-	// 		.then((data) => setClimbs(data));
-	// }, [climbs]);
+	useEffect(() => {
+		fetch(`${url}/${locations.latitude}/${locations.longitude}`)
+			.then((res) => res.json())
+			.then((data) => setClimbs(data));
+		console.log('this is climbs data', climbs);
+	}, [locations]);
 
 	// const getLocations = async () => {
 	// 	try {
@@ -31,9 +36,9 @@ function App() {
 
 	// useEffect(() => getLocations(), []);
 
-	const handleCoords = (coords) => {
-		setLocations(coords);
-		console.log(locations);
+	const handleCoords = (longitude, latitude) => {
+		setLocations({ latitude: latitude, longitude: longitude });
+		console.log(latitude, longitude);
 	};
 
 	return (
