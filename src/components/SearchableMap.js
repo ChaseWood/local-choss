@@ -7,13 +7,17 @@ import Geocoder from 'react-map-gl-geocoder';
 
 const TOKEN = process.env.REACT_APP_TOKEN;
 
-const SearchableMap = () => {
+const SearchableMap = (props) => {
 	const [viewport, setViewport] = useState({
 		latitude: 0,
 		longitude: 0,
 		zoom: 1,
 	});
 	const [searchResultsLayer, setSearchResultsLayer] = useState(null);
+
+	const mapStyle = {
+		float: 'right',
+	};
 
 	const mapRef = React.useRef();
 
@@ -22,6 +26,7 @@ const SearchableMap = () => {
 			...viewport,
 			...newViewport,
 		});
+		props.handleCoords(viewport);
 	};
 
 	const handleOnResult = (event) => {
@@ -39,17 +44,13 @@ const SearchableMap = () => {
 
 	return (
 		<div style={{ height: '100vh' }}>
-			<h1
-				style={{ textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>
-				Use the search bar to find a location or click <a href='/'>here</a> to
-				find your location
-			</h1>
 			<MapGL
+				style={mapStyle}
 				ref={mapRef}
 				{...viewport}
 				mapStyle='mapbox://styles/chasewood/ckhmw6nna08e019qnybnfzjor'
 				width='100%'
-				height='90%'
+				height='100%'
 				onViewportChange={handleViewportChange}
 				mapboxApiAccessToken={TOKEN}>
 				<Geocoder

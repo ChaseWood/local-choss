@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MapGL, { GeolocateControl, Marker } from 'react-map-gl';
+import SearchableMap from './SearchableMap';
 import 'mapbox-gl/dist/mapbox-gl.css';
 require('dotenv').config();
 
@@ -36,11 +37,6 @@ const Map = (props) => {
 	// Creates a map that goes to your current location by clicking on a button in the top left corner of the page
 	return (
 		<div style={{ margin: '0 auto' }}>
-			<h1
-				style={{ textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>
-				GeoLocator: Click To Find Your Location or click{' '}
-				<a href='/search'>here</a> to search for a location
-			</h1>
 			<MapGL
 				onClick={handleClick}
 				{...viewport}

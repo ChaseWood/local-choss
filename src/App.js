@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
 import Map from './components/Map';
 import SearchableMap from './components/SearchableMap';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import MapContainer from './components/MapContainer';
 
 function App() {
 	const apiKey = '200965041-9849b0bf4efa888bd435da7521d00992';
@@ -9,12 +11,13 @@ function App() {
 	const url = 'http://localhost:3000/climbs';
 
 	const [locations, setLocations] = useState([]);
+	const [climbs, setClimbs] = useState([]);
 
 	// useEffect(() => {
-	// 	fetch(url)
+	// 	fetch('url/#{locations.latitude}/#{locations.longitude}')
 	// 		.then((res) => res.json())
-	// 		.then((data) => setLocations(data));
-	// }, []);
+	// 		.then((data) => setClimbs(data));
+	// }, [climbs]);
 
 	// const getLocations = async () => {
 	// 	try {
@@ -28,11 +31,19 @@ function App() {
 
 	// useEffect(() => getLocations(), []);
 
+	const handleCoords = (coords) => {
+		setLocations(coords);
+		console.log(locations);
+	};
+
 	return (
 		<div>
 			<Switch>
-				<Route exact path='/' component={Map} />
-				<Route exact path='/' component={SearchableMap} />
+				<Route
+					exact
+					path='/'
+					render={(rp) => <MapContainer {...rp} handleCoords={handleCoords} />}
+				/>
 			</Switch>
 		</div>
 	);
