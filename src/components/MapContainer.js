@@ -54,29 +54,23 @@ export default function PermanentDrawerLeft(props) {
 				<div className={classes.toolbar} />
 				<Divider />
 				<List>
-					{[
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-						'Climb',
-					].map((text, index) => (
-						<>
-							<ListItem button key={text}>
-								<ListItemText primary={text} />
-							</ListItem>
-							<Divider />
-						</>
-					))}
+					{props.climbs.routes
+						? props.climbs.routes.map((text) => (
+								<>
+									<ListItem button key={text.name}>
+										<ListItemText primary={text.name} />
+									</ListItem>
+									<Divider />
+								</>
+						  ))
+						: ['climb', 'climb'].map((text, index) => (
+								<>
+									<ListItem button key={text}>
+										<ListItemText primary={text} />
+									</ListItem>
+									<Divider />
+								</>
+						  ))}
 				</List>
 			</Drawer>
 			<main className={classes.content}>
@@ -85,3 +79,12 @@ export default function PermanentDrawerLeft(props) {
 		</div>
 	);
 }
+
+// {props.climbs.routes[0] ? props.climbs.routes.map((text, index) => (
+// 						<>
+// 							<ListItem button key={index}>
+// 								<ListItemText primary={index} />
+// 							</ListItem>
+// 							<Divider />
+// 						</>
+// 					))}
