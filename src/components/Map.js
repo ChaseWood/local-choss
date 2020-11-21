@@ -12,9 +12,7 @@ const geolocateStyle = {
 	padding: '10px',
 };
 
-const Map = (props) => {
-	const { locations } = props;
-
+const Map = () => {
 	const [viewport, setViewPort] = useState({
 		width: '100%',
 		height: 900,
@@ -27,25 +25,16 @@ const Map = (props) => {
 		setViewPort({ ...viewport, transitionDuration: 0.5 });
 	};
 
-	//This onClick works when the geolocator to find your location fires.
-	// Hoping to use this to get the lat and long and use that to then find the
-	// climbs that are within 50 miles or so
-	const handleClick = () => {
-		console.log('THIS WAS CLICKED');
-	};
-
 	// Creates a map that goes to your current location by clicking on a button in the top left corner of the page
 	return (
 		<div style={{ margin: '0 auto' }}>
 			<MapGL
-				onClick={handleClick}
 				{...viewport}
 				mapboxApiAccessToken={TOKEN}
 				mapStyle='mapbox://styles/chasewood/ckhmw6nna08e019qnybnfzjor'
 				onViewportChange={_onViewportChange}>
 				{/* GeoLocateControl creates the button to locate where you are */}
 				<GeolocateControl
-					position='top-right'
 					style={geolocateStyle}
 					positionOptions={{ enableHighAccuracy: true }}
 					trackUserLocation={true}

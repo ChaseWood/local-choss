@@ -7,8 +7,8 @@ function App() {
 	const url = 'http://localhost:3000/climbs';
 
 	const [locations, setLocations] = useState({
-		latitude: 39.7331135,
-		longitude: -104.96619050000001,
+		latitude: null,
+		longitude: null,
 	});
 
 	const [climbs, setClimbs] = useState([]);
@@ -35,6 +35,7 @@ function App() {
 						<MapContainer {...rp} handleCoords={handleCoords} climbs={climbs} />
 					)}
 				/>
+				{/* <Route exact path='/map' component={Map} /> */}
 			</Switch>
 		</div>
 	);

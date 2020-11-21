@@ -42,7 +42,10 @@ export default function PermanentDrawerLeft(props) {
 		<div className={classes.root}>
 			<CssBaseline />
 			<AppBar position='fixed' className={classes.appBar}>
-				<SearchableMap handleCoords={props.handleCoords} />
+				<SearchableMap
+					handleCoords={props.handleCoords}
+					climbs={props.climbs}
+				/>
 			</AppBar>
 			<Drawer
 				className={classes.drawer}
@@ -79,12 +82,3 @@ export default function PermanentDrawerLeft(props) {
 		</div>
 	);
 }
-
-// {props.climbs.routes[0] ? props.climbs.routes.map((text, index) => (
-// 						<>
-// 							<ListItem button key={index}>
-// 								<ListItemText primary={index} />
-// 							</ListItem>
-// 							<Divider />
-// 						</>
-// 					))}
