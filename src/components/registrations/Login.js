@@ -29,7 +29,7 @@ const Login = (props) => {
 		axios
 			.post('http://localhost:3001/login', { user }, { withCredentials: true })
 			.then((response) => {
-				if (response.data.logged_in) {
+				if (response.data.logged_in === true) {
 					props.handleLogin(response.data);
 					redirect();
 				} else {
@@ -44,7 +44,7 @@ const Login = (props) => {
 	};
 
 	useEffect(() => {
-		if (!loggedInStatus) {
+		if (loggedInStatus.isLoggedIn) {
 			redirect();
 		} else {
 			return null;
