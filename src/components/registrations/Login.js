@@ -11,6 +11,8 @@ const Login = (props) => {
 		errors: '',
 	});
 
+	console.log('this is loggedinstatus', loggedInStatus);
+
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
 	};
@@ -42,7 +44,7 @@ const Login = (props) => {
 	};
 
 	useEffect(() => {
-		if (loggedInStatus) {
+		if (!loggedInStatus) {
 			redirect();
 		} else {
 			return null;

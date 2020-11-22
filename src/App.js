@@ -71,11 +71,11 @@ function App() {
 	const [climbs, setClimbs] = useState([]);
 
 	//api call made to get climbs close to location from search
-	// useEffect(() => {
-	// 	fetch(`${url}/${locations.latitude}/${locations.longitude}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => setClimbs(data));
-	// }, [locations]);
+	useEffect(() => {
+		fetch(`${url}/${locations.latitude}/${locations.longitude}`)
+			.then((res) => res.json())
+			.then((data) => setClimbs(data));
+	}, [locations]);
 
 	//function that lifted state from searchableMap.js to set lat
 	// and long when user searched a location

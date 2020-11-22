@@ -15,7 +15,7 @@ const Home = (props) => {
 
 	return (
 		<div>
-			<Link to='login'>Log In</Link>
+			<Link to='/login'>Log In</Link>
 			<br></br>
 			<Link to='/signup'>Sign Up</Link>
 			<br></br>
