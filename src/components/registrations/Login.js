@@ -53,8 +53,8 @@ const Login = (props) => {
 		return (
 			<div>
 				<ul>
-					{creds.errors.localeCompare((error) => {
-						return <li key={error}> {error}</li>;
+					{creds.errors.map((error) => {
+						return <li key={error}>{error}</li>;
 					})}
 				</ul>
 			</div>

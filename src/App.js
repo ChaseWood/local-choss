@@ -8,7 +8,7 @@ import Login from './components/registrations/Login';
 import Signup from './components/registrations/Signup';
 
 function App() {
-	const url = 'http://localhost:3000/climbs';
+	const url = 'http://localhost:3001/climbs';
 
 	//handling if the user is logged in or not
 	const [isLoggedIn, setIsLoggedIn] = useState({
@@ -37,8 +37,11 @@ function App() {
 	//if the user is verified then a logged_in boolean is returned along with
 	// the user object
 	const loginStatus = () => {
+		const url = 'http://localhost:3001/logged_in';
 		axios
-			.get('http//locathost:3001/logged_in', { withCredentials: true })
+			.get(`${url}`, {
+				withCredentials: true,
+			})
 			.then((response) => {
 				if (response.data.logged_in) {
 					handleLogin(response);
@@ -52,7 +55,7 @@ function App() {
 	//keeps track of any changes to the logged in user
 	useEffect(() => {
 		loginStatus();
-	}, [isLoggedIn]);
+	}, []);
 
 	////////////////////////////////////////////////////////////////////////////
 	//////////////BELOW HANDLES SEARCHING AND GETTING THE LOCATION//////////////
@@ -68,11 +71,11 @@ function App() {
 	const [climbs, setClimbs] = useState([]);
 
 	//api call made to get climbs close to location from search
-	useEffect(() => {
-		fetch(`${url}/${locations.latitude}/${locations.longitude}`)
-			.then((res) => res.json())
-			.then((data) => setClimbs(data));
-	}, [locations]);
+	// useEffect(() => {
+	// 	fetch(`${url}/${locations.latitude}/${locations.longitude}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => setClimbs(data));
+	// }, [locations]);
 
 	//function that lifted state from searchableMap.js to set lat
 	// and long when user searched a location
@@ -86,7 +89,13 @@ function App() {
 				<Route
 					exact
 					path='/'
-					render={(rp) => <Home {...rp} loggedInStatus={isLoggedIn} />}
+					render={(rp) => (
+						<Home
+							{...rp}
+							handleLogout={handleLogout}
+							loggedInStatus={isLoggedIn}
+						/>
+					)}
 				/>
 				<Route
 					exact
