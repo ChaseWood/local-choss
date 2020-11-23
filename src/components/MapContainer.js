@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -71,6 +72,32 @@ export default function ClippedDrawer(props) {
 
 	const handleClose = () => {
 		setAnchorEl(null);
+	};
+
+	const setToDo = (props) => {
+		axios({
+			method: 'post',
+			url: 'http://localhost:3001/climbs',
+			data: {
+				id: { props },
+				name: { props },
+				type: { props },
+				rating: { props },
+				stars: { props },
+				starVotes: { props },
+				pitches: { props },
+				location: { props },
+				longitude: { props },
+				latitude: { props },
+			},
+		}).then(
+			(response) => {
+				console.log(response);
+			},
+			(error) => {
+				console.log(error);
+			}
+		);
 	};
 
 	return (
@@ -145,6 +172,11 @@ export default function ClippedDrawer(props) {
 									<>
 										<ListItem button key={text.name}>
 											<ListItemText primary={text.name} />
+											<ListItemText
+												onClick={setToDo(text)}
+												secondary='Add To-Do'
+											/>
+											<ListItemText secondary='Add New Tick' />
 										</ListItem>
 										<Divider />
 									</>

@@ -83,6 +83,12 @@ function App() {
 		setLocations({ latitude: latitude, longitude: longitude });
 	};
 
+	// useEffect(() => {
+	// 	fetch(`${url}/${locations.latitude}/${locations.longitude}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => setClimbs(data));
+	// }, [locations]);
+
 	return (
 		<div style={{ display: 'flex' }}>
 			<Switch>

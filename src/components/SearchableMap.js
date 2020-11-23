@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
+import Icon from './marker/marker.png';
 
 const TOKEN = process.env.REACT_APP_TOKEN;
 
@@ -64,12 +65,28 @@ const SearchableMap = (props) => {
 				/>
 				{props.locations.latitude ? (
 					<Marker
+						offsetLeft={-20}
+						offsetTop={-20}
 						key={props.locations.latitude}
 						latitude={props.locations.latitude}
 						longitude={props.locations.longitude}>
-						<div>Empty</div>
+						<img src={Icon} alt='ICON' />
 					</Marker>
-				) : null}
+				) : (
+					<div></div>
+				)}
+				{props.climbs.routes
+					? props.climbs.routes.map((location) => (
+							<Marker
+								offsetLeft={-20}
+								offsetTop={-20}
+								key={location.id}
+								latitude={location.latitude}
+								longitude={location.longitude}>
+								<img src={Icon} alt='ICON' />
+							</Marker>
+					  ))
+					: null}
 				<DeckGL {...viewport} layers={[searchResultsLayer]} />
 			</MapGL>
 		</div>
