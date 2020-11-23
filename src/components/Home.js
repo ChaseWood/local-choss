@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = (props) => {
+	const { loggedInStatus } = props;
 	const handleClick = () => {
 		axios
 			.delete('http://localhost:3001/logout', { withCredentials: true })
@@ -15,11 +16,18 @@ const Home = (props) => {
 
 	return (
 		<div>
-			<Link to='/login'>Log In</Link>
+			{loggedInStatus.isLoggedIn === false ? (
+				<Link to='/login'>Log In</Link>
+			) : null}
 			<br></br>
-			<Link to='/signup'>Sign Up</Link>
+
+			{loggedInStatus.isLoggedIn === false ? (
+				<Link to='/signup'>Sign Up</Link>
+			) : null}
+
 			<br></br>
-			{props.loggedInStatus ? (
+
+			{loggedInStatus.isLoggedIn === true ? (
 				<Link to='/logout' onClick={handleClick}>
 					Log Out
 				</Link>

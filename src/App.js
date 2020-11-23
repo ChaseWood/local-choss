@@ -84,11 +84,11 @@ function App() {
 	};
 
 	return (
-		<div>
+		<div style={{ display: 'flex' }}>
 			<Switch>
 				<Route
 					exact
-					path='/'
+					path='/home'
 					render={(rp) => (
 						<Home
 							{...rp}
@@ -120,13 +120,19 @@ function App() {
 						/>
 					)}
 				/>
-				{/* <Route
+
+				<Route
 					exact
 					path='/'
 					render={(rp) => (
-						<MapContainer {...rp} handleCoords={handleCoords} climbs={climbs} />
+						<MapContainer
+							{...rp}
+							loggedInStatus={isLoggedIn}
+							handleCoords={handleCoords}
+							climbs={climbs}
+						/>
 					)}
-				/> */}
+				/>
 			</Switch>
 		</div>
 	);
