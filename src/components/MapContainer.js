@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -74,21 +74,30 @@ export default function ClippedDrawer(props) {
 		setAnchorEl(null);
 	};
 
-	const setToDo = (props) => {
+	const setToDo = (climb) => {
+		console.log('this is climb in mapContainer', climb);
 		axios({
 			method: 'post',
 			url: 'http://localhost:3001/climbs',
 			data: {
-				id: { props },
-				name: { props },
-				type: { props },
-				rating: { props },
-				stars: { props },
-				starVotes: { props },
-				pitches: { props },
-				location: { props },
-				longitude: { props },
-				latitude: { props },
+				id: 4456,
+				name: 'new name',
+				rating: '435',
+				stars: '543',
+				pitches: 4,
+				location: ['boulder', 'Co'],
+				longitude: 543,
+				latitude: 543,
+				user_id: 1,
+				// id: climb.id,
+				// name: climb.name,
+				// rating: climb.rating,
+				// stars: climb.stars,
+				// pitches: climb.pitches,
+				// location: climb.location,
+				// longitude: climb.longitude,
+				// latitude: climb.latitude,
+				// user_id: 1
 			},
 		}).then(
 			(response) => {
@@ -168,23 +177,26 @@ export default function ClippedDrawer(props) {
 				<div className={classes.drawerContainer}>
 					<List>
 						{props.climbs.routes
-							? props.climbs.routes.map((text) => (
+							? props.climbs.routes.map((route) => (
 									<>
-										<ListItem button key={text.name}>
-											<ListItemText primary={text.name} />
-											<ListItemText
-												onClick={setToDo(text)}
-												secondary='Add To-Do'
-											/>
-											<ListItemText secondary='Add New Tick' />
+										<ListItem button key={route.name}>
+											<h3>{route.name}</h3>
+											<Button
+												variant='contained'
+												text='Set To-Do'
+												onClick={() => setToDo(route)}
+												secondary='Add To-Do'>
+												Set To-Do
+											</Button>
+											<Button variant='contained'>Add New Tick</Button>
 										</ListItem>
 										<Divider />
 									</>
 							  ))
-							: ['climb', 'climb'].map((text, index) => (
+							: ['climb', 'climb'].map((route, index) => (
 									<>
-										<ListItem button key={text}>
-											<ListItemText primary={text} />
+										<ListItem button key={route}>
+											<ListItemText primary={route} />
 										</ListItem>
 										<Divider />
 									</>
