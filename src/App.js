@@ -130,6 +130,7 @@ function App() {
 							loggedInStatus={isLoggedIn}
 							handleCoords={handleCoords}
 							climbs={climbs}
+							locations={locations}
 						/>
 					)}
 				/>

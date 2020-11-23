@@ -166,6 +166,7 @@ export default function ClippedDrawer(props) {
 				<SearchableMap
 					handleCoords={props.handleCoords}
 					climbs={props.climbs}
+					locations={props.locations}
 				/>
 			</main>
 		</div>

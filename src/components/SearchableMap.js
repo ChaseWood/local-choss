@@ -62,6 +62,14 @@ const SearchableMap = (props) => {
 					mapboxApiAccessToken={TOKEN}
 					position='top-left'
 				/>
+				{props.locations.latitude ? (
+					<Marker
+						key={props.locations.latitude}
+						latitude={props.locations.latitude}
+						longitude={props.locations.longitude}>
+						<div>Empty</div>
+					</Marker>
+				) : null}
 				<DeckGL {...viewport} layers={[searchResultsLayer]} />
 			</MapGL>
 		</div>
