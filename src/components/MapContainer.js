@@ -75,29 +75,22 @@ export default function ClippedDrawer(props) {
 	};
 
 	const setToDo = (climb) => {
-		console.log('this is climb in mapContainer', climb);
+		console.log(props.loggedInStatus);
 		axios({
 			method: 'post',
 			url: 'http://localhost:3001/climbs',
 			data: {
-				id: 4456,
-				name: 'new name',
-				rating: '435',
-				stars: '543',
-				pitches: 4,
-				location: ['boulder', 'Co'],
-				longitude: 543,
-				latitude: 543,
-				user_id: 1,
-				// id: climb.id,
-				// name: climb.name,
-				// rating: climb.rating,
-				// stars: climb.stars,
-				// pitches: climb.pitches,
-				// location: climb.location,
-				// longitude: climb.longitude,
-				// latitude: climb.latitude,
-				// user_id: 1
+				route_id: climb.id,
+				name: climb.name,
+				style: climb.type,
+				rating: climb.rating,
+				stars: climb.stars,
+				pitches: climb.pitches,
+				location: climb.location,
+				longitude: climb.longitude,
+				latitude: climb.latitude,
+				url: climb.url,
+				user_id: props.loggedInStatus.user.id,
 			},
 		}).then(
 			(response) => {
