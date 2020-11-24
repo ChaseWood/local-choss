@@ -6,6 +6,7 @@ import MapContainer from './components/MapContainer';
 import Home from './components/Home';
 import Login from './components/registrations/Login';
 import Signup from './components/registrations/Signup';
+import Profile from './components/Profile';
 
 function App() {
 	const url = 'http://localhost:3001/climbs';
@@ -134,12 +135,18 @@ function App() {
 					render={(rp) => (
 						<MapContainer
 							{...rp}
+							handleLogout={handleLogout}
 							loggedInStatus={isLoggedIn}
 							handleCoords={handleCoords}
 							climbs={climbs}
 							locations={locations}
 						/>
 					)}
+				/>
+				<Route
+					exact
+					path='/user'
+					render={(rp) => <Profile {...rp} loggedInStatus={isLoggedIn} />}
 				/>
 			</Switch>
 		</div>

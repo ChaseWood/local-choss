@@ -31,6 +31,7 @@ const Login = (props) => {
 			.then((response) => {
 				if (response.data.logged_in === true) {
 					props.handleLogin(response.data);
+					// localStorage.setItem('user', response.data);
 					redirect();
 				} else {
 					setCreds({ ...creds, errors: response.data.errors });

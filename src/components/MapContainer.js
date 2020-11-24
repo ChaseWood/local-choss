@@ -74,13 +74,26 @@ export default function ClippedDrawer(props) {
 		setAnchorEl(null);
 	};
 
+	const handleLogoutClick = () => {
+		axios
+			.delete('http://localhost:3001/logout', { withCredentials: true })
+			.then((response) => {
+				props.handleLogout();
+				props.history.push('/');
+			})
+			.catch((error) => console.log(error));
+	};
+
+	//sets climb to the user who is logged in
 	const setToDo = (climb) => {
-		console.log(props.loggedInStatus);
+		console.log('this is setToDo', climb);
 		axios({
 			method: 'post',
-			url: 'http://localhost:3001/climbs',
+			url: `http://localhost:3001/settodo/${props.loggedInStatus.user.id}/${climb.id}`,
 			data: {
+				user_id: props.loggedInStatus.user.id,
 				route_id: climb.id,
+				ticklist: false,
 				name: climb.name,
 				style: climb.type,
 				rating: climb.rating,
@@ -90,7 +103,34 @@ export default function ClippedDrawer(props) {
 				longitude: climb.longitude,
 				latitude: climb.latitude,
 				url: climb.url,
+			},
+		}).then(
+			(response) => {
+				console.log(response);
+			},
+			(error) => {
+				console.log(error);
+			}
+		);
+	};
+
+	const handleTickList = (tick) => {
+		axios({
+			method: 'post',
+			url: `http://localhost:3001/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
+			data: {
 				user_id: props.loggedInStatus.user.id,
+				route_id: tick.id,
+				ticklist: true,
+				name: tick.name,
+				style: tick.type,
+				rating: tick.rating,
+				stars: tick.stars,
+				pitches: tick.pitches,
+				location: tick.location,
+				longitude: tick.longitude,
+				latitude: tick.latitude,
+				url: tick.url,
 			},
 		}).then(
 			(response) => {
@@ -127,9 +167,9 @@ export default function ClippedDrawer(props) {
 								</Link>
 							)}
 							{props.loggedInStatus.isLoggedIn === true ? (
-								<Link to='/logout'>
-									<Button color='inherit'>logout</Button>
-								</Link>
+								<Button onClick={handleLogoutClick} color='inherit'>
+									logout
+								</Button>
 							) : null}
 							<IconButton
 								aria-label='account of current user'
@@ -181,7 +221,11 @@ export default function ClippedDrawer(props) {
 												secondary='Add To-Do'>
 												Set To-Do
 											</Button>
-											<Button variant='contained'>Add New Tick</Button>
+											<Button
+												onClick={() => handleTickList(route)}
+												variant='contained'>
+												Add New Tick
+											</Button>
 										</ListItem>
 										<Divider />
 									</>
