@@ -34,30 +34,41 @@ function App() {
 		});
 	};
 
+	// Checks if user is logged in using local storage
+	useEffect(() => {
+		const loggedInUser = localStorage.getItem('user');
+		if (loggedInUser) {
+			const foundUser = JSON.parse(loggedInUser);
+			handleLogin(foundUser);
+		}
+	}, []);
+
+	// THE CODE BELOW WAS CHECKING FOR IF SOMEONE WAS LOGGED IN THROUGH THE BACK END I STARTED DOING IT THROUGH THE LOCAL STORAGE FOR PERSISTENCE BECAUSE I COULD NOT FIGURE OUT HOW TO GET THIS TO WORK.
+
 	//get request using axios to communicate with rails server
 	//it checks through the def is_logged_in? route
 	//if the user is verified then a logged_in boolean is returned along with
 	// the user object
-	const loginStatus = () => {
-		const url = 'http://localhost:3001/logged_in';
-		axios
-			.get(`${url}`, {
-				withCredentials: true,
-			})
-			.then((response) => {
-				if (response.data.logged_in) {
-					handleLogin(response);
-				} else {
-					handleLogout(response);
-				}
-			})
-			.catch((error) => console.log('api errors:', error));
-	};
+	// const loginStatus = () => {
+	// 	const url = 'http://localhost:3001/logged_in';
+	// 	axios
+	// 		.get(`${url}`, {
+	// 			withCredentials: true,
+	// 		})
+	// 		.then((response) => {
+	// 			if (response.data.logged_in) {
+	// 				handleLogin(response);
+	// 			} else {
+	// 				handleLogout(response);
+	// 			}
+	// 		})
+	// 		.catch((error) => console.log('api errors:', error));
+	// };
 
-	//keeps track of any changes to the logged in user
-	useEffect(() => {
-		loginStatus();
-	}, []);
+	// //keeps track of any changes to the logged in user
+	// useEffect(() => {
+	// 	loginStatus();
+	// }, []);
 
 	////////////////////////////////////////////////////////////////////////////
 	//////////////BELOW HANDLES SEARCHING AND GETTING THE LOCATION//////////////
@@ -84,12 +95,6 @@ function App() {
 	const handleCoords = (longitude, latitude) => {
 		setLocations({ latitude: latitude, longitude: longitude });
 	};
-
-	// useEffect(() => {
-	// 	fetch(`${url}/${locations.latitude}/${locations.longitude}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => setClimbs(data));
-	// }, [locations]);
 
 	return (
 		<div style={{ display: 'flex' }}>
@@ -135,6 +140,7 @@ function App() {
 					render={(rp) => (
 						<MapContainer
 							{...rp}
+							handleLogin={handleLogin}
 							handleLogout={handleLogout}
 							loggedInStatus={isLoggedIn}
 							handleCoords={handleCoords}

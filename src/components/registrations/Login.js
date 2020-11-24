@@ -11,8 +11,6 @@ const Login = (props) => {
 		errors: '',
 	});
 
-	console.log('this is loggedinstatus', loggedInStatus);
-
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
 	};
@@ -31,7 +29,8 @@ const Login = (props) => {
 			.then((response) => {
 				if (response.data.logged_in === true) {
 					props.handleLogin(response.data);
-					// localStorage.setItem('user', response.data);
+					console.log('this is response.data from login', response.data);
+					localStorage.setItem('user', JSON.stringify(response.data));
 					redirect();
 				} else {
 					setCreds({ ...creds, errors: response.data.errors });

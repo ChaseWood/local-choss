@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function ClippedDrawer(props) {
+export default function MapContainer(props) {
 	const classes = useStyles();
 	///////////////added states and functions/////////////
 	const [auth, setAuth] = React.useState(true);
@@ -80,9 +80,20 @@ export default function ClippedDrawer(props) {
 			.then((response) => {
 				props.handleLogout();
 				props.history.push('/');
+				localStorage.clear();
 			})
 			.catch((error) => console.log(error));
 	};
+
+	// // Checks if user is logged in using local storage
+	// useEffect(() => {
+	// 	const loggedInUser = localStorage.getItem('user');
+	// 	if (loggedInUser) {
+	// 		const foundUser = JSON.parse(loggedInUser);
+	// 		props.handleLogin(foundUser);
+	// 		console.log('this is localStorage', foundUser);
+	// 	}
+	// }, []);
 
 	//sets climb to the user who is logged in
 	const setToDo = (climb) => {
