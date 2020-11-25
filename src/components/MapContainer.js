@@ -63,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
 		textDecoration: 'none',
 		color: 'black',
 	},
+	routeText: {
+		fontSize: '2',
+	},
+	buttonMargin: {
+		marginRight: 5,
+		marginLeft: 'auto',
+	},
 }));
 
 export default function MapContainer(props) {
@@ -172,9 +179,7 @@ export default function MapContainer(props) {
 							Local Choss
 						</Typography>
 					</Link>
-					<Typography variant='h6' noWrap>
-						Crags by State
-					</Typography>
+
 					{/*/////////// Login and profile buttons ///////////*/}
 					{auth && (
 						<div className={classes.menuButton}>
@@ -238,18 +243,22 @@ export default function MapContainer(props) {
 							? props.climbs.routes.map((route) => (
 									<>
 										<ListItem button key={route.name}>
-											<h3>{route.name}</h3>
+											<Typography variant='body2' className={classes.routeText}>
+												{route.name}
+											</Typography>
 											<Button
+												className={classes.buttonMargin}
+												size='small'
 												variant='contained'
 												text='Set To-Do'
-												onClick={() => setToDo(route)}
-												secondary='Add To-Do'>
-												Set To-Do
+												onClick={() => setToDo(route)}>
+												To-Do
 											</Button>
 											<Button
+												size='small'
 												onClick={() => handleTickList(route)}
 												variant='contained'>
-												Add New Tick
+												Tick
 											</Button>
 										</ListItem>
 										<Divider />
