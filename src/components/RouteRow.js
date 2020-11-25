@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
+import StarIcon from '@material-ui/icons/Star';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -16,13 +18,28 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(2),
 	},
 	title: {
-		flexGrow: 1,
+		paddingRight: 20,
+	},
+	location: {
+		fontSize: 14,
+		fontWeight: 'fontWeightLight',
+		textAlign: 'left',
+	},
+	remove: {
+		marginLeft: 'auto',
 	},
 }));
 
 export default function RouteRow(props) {
 	const classes = useStyles();
 	const { climb } = props;
+
+	const deleteClimb = () => {
+		Axios.delete(`http://localhost:3001/climbs/${climb.id}`).then(
+			(res) => res.data
+		);
+		props.deleteClimb();
+	};
 
 	return (
 		<div className={classes.root}>
@@ -32,7 +49,22 @@ export default function RouteRow(props) {
 					<Typography variant='h6' className={classes.title}>
 						{climb.name}
 					</Typography>
-					<Button color='inherit'>Login</Button>
+					{climb.location.map((location) => (
+						<Typography className={classes.location}>{location}/</Typography>
+					))}
+					<Typography variant='h6' className={classes.title}>
+						{climb.rating}
+					</Typography>
+					<Typography variant='h6' className={classes.title}>
+						{climb.stars}
+						<StarIcon />
+					</Typography>
+					<Button
+						className={classes.remove}
+						onClick={deleteClimb}
+						color='inherit'>
+						Remove
+					</Button>
 				</Toolbar>
 			</AppBar>
 		</div>

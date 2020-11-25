@@ -41,11 +41,11 @@ const Profile = (props) => {
 
 	useEffect(() => {
 		getUserToDos();
-	}, []);
+	}, [userToDos]);
 
 	useEffect(() => {
 		getUserTickList();
-	}, []);
+	}, [userTickList]);
 
 	return (
 		<>
@@ -55,12 +55,16 @@ const Profile = (props) => {
 				<h3>Name</h3>
 				<h3>To Do List</h3>
 				{userToDos.data
-					? userToDos.data.map((climb) => <RouteRow climb={climb} />)
+					? userToDos.data.map((climb) => (
+							<RouteRow deleteClimb={getUserToDos} climb={climb} />
+					  ))
 					: null}
 
 				<h3>Tick List</h3>
 				{userTickList.data
-					? userTickList.data.map((climb) => <RouteRow climb={climb} />)
+					? userTickList.data.map((climb) => (
+							<RouteRow deleteClimb={getUserTickList} climb={climb} />
+					  ))
 					: null}
 			</Container>
 		</>

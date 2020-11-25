@@ -10,13 +10,13 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
-import SearchableMap from './SearchableMap';
+import TopoMap from './marker/TopoVert.jpg';
+import SearchableMap from '../components/SearchableMap';
 
 const drawerWidth = 350;
 
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 		flexShrink: 0,
 	},
 	drawerPaper: {
+		background: `url(${TopoMap})`,
 		width: drawerWidth,
 	},
 	drawerContainer: {
@@ -243,14 +244,7 @@ export default function MapContainer(props) {
 										<Divider />
 									</>
 							  ))
-							: ['climb', 'climb'].map((route, index) => (
-									<>
-										<ListItem button key={route}>
-											<ListItemText primary={route} />
-										</ListItem>
-										<Divider />
-									</>
-							  ))}
+							: null}
 					</List>
 				</div>
 			</Drawer>
