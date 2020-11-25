@@ -17,7 +17,6 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import SearchableMap from './SearchableMap';
-import { TextareaAutosize } from '@material-ui/core';
 
 const drawerWidth = 350;
 
@@ -80,7 +79,6 @@ export default function MapContainer(props) {
 			.then((response) => {
 				props.handleLogout();
 				props.history.push('/');
-				localStorage.clear();
 			})
 			.catch((error) => console.log(error));
 	};
@@ -158,9 +156,11 @@ export default function MapContainer(props) {
 			<CssBaseline />
 			<AppBar position='fixed' className={classes.appBar}>
 				<Toolbar>
-					<Typography variant='h4' noWrap>
-						Local Choss
-					</Typography>
+					<Link to='/'>
+						<Typography variant='h4' noWrap>
+							Local Choss
+						</Typography>
+					</Link>
 					<Typography variant='h6' noWrap>
 						Crags by State
 					</Typography>
@@ -204,7 +204,9 @@ export default function MapContainer(props) {
 								}}
 								open={open}
 								onClose={handleClose}>
-								<MenuItem onClick={handleClose}>Profile</MenuItem>
+								<Link to={'/users/' + props.loggedInStatus.user.id}>
+									<MenuItem onClick={handleClose}>Profile</MenuItem>
+								</Link>
 								<MenuItem onClick={handleClose}>My account</MenuItem>
 							</Menu>
 						</div>

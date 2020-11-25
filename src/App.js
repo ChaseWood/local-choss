@@ -32,6 +32,7 @@ function App() {
 			isLoggedIn: false,
 			user: {},
 		});
+		localStorage.clear();
 	};
 
 	// Checks if user is logged in using local storage
@@ -151,8 +152,14 @@ function App() {
 				/>
 				<Route
 					exact
-					path='/user'
-					render={(rp) => <Profile {...rp} loggedInStatus={isLoggedIn} />}
+					path='/users/:id'
+					render={(rp) => (
+						<Profile
+							{...rp}
+							handleLogout={handleLogout}
+							loggedInStatus={isLoggedIn}
+						/>
+					)}
 				/>
 			</Switch>
 		</div>
