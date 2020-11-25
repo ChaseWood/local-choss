@@ -180,42 +180,12 @@ const Login = (props) => {
 					</Grid>
 				</form>
 			</div>
+			<div>
+				<div>{creds.errors ? handleErrors() : null}</div>
+			</div>
 			<Box mt={8}>
 				<Copyright />
 			</Box>
-			<div>
-				<h1>Login In</h1>
-
-				<form onSubmit={handleSubmit}>
-					<input
-						placeholder='username'
-						type='text'
-						name='username'
-						onChange={handleChange}
-					/>
-					<input
-						placeholder='email'
-						type='text'
-						name='email'
-						onChange={handleChange}
-					/>
-					<input
-						placeholder='password'
-						type='password'
-						name='password'
-						onChange={handleChange}
-					/>
-
-					<button placeholder='submit' type='submit'>
-						Log In
-					</button>
-
-					<div>
-						or <Link to='/signup'>Sign Up</Link>
-					</div>
-				</form>
-				<div>{creds.errors ? handleErrors() : null}</div>
-			</div>
 		</Container>
 	);
 };
