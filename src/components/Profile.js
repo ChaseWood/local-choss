@@ -10,6 +10,11 @@ const Profile = (props) => {
 	const { handleLogout } = props;
 	const [userToDos, setUserToDos] = useState({});
 	const [userTickList, setUserTickList] = useState({});
+	const [removeRow, setRemoveRow] = useState(false);
+
+	const updateProfile = () => {
+		setRemoveRow(!removeRow);
+	};
 
 	const getUserToDos = () => {
 		axios
@@ -41,11 +46,11 @@ const Profile = (props) => {
 
 	useEffect(() => {
 		getUserToDos();
-	}, [userToDos]);
+	}, [removeRow]);
 
 	useEffect(() => {
 		getUserTickList();
-	}, [userTickList]);
+	}, [removeRow]);
 
 	return (
 		<>
@@ -56,14 +61,22 @@ const Profile = (props) => {
 				<h3>To Do List</h3>
 				{userToDos.data
 					? userToDos.data.map((climb) => (
-							<RouteRow deleteClimb={getUserToDos} climb={climb} />
+							<RouteRow
+								deleteClimb={getUserToDos}
+								climb={climb}
+								setRemoveRow={updateProfile}
+							/>
 					  ))
 					: null}
 
 				<h3>Tick List</h3>
 				{userTickList.data
 					? userTickList.data.map((climb) => (
-							<RouteRow deleteClimb={getUserTickList} climb={climb} />
+							<RouteRow
+								deleteClimb={getUserTickList}
+								climb={climb}
+								setRemoveRow={updateProfile}
+							/>
 					  ))
 					: null}
 			</Container>

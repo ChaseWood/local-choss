@@ -39,6 +39,7 @@ export default function RouteRow(props) {
 			(res) => res.data
 		);
 		props.deleteClimb();
+		props.setRemoveRow();
 	};
 
 	return (

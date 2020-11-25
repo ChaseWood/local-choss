@@ -24,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
 		width: '100%',
-		///////////////added button styles/////////////
 		flexGrow: 1,
 	},
 	appBar: {
+		backgroundColor: '#264653',
+		// background: `url(${TopoMap})`,
 		zIndex: theme.zIndex.drawer + 1,
 	},
 	drawer: {
@@ -35,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 		flexShrink: 0,
 	},
 	drawerPaper: {
-		background: `url(${TopoMap})`,
+		// background: `url(${TopoMap})`,
+		backgroundColor: '#e9c46a',
 		width: drawerWidth,
 	},
 	drawerContainer: {
@@ -52,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+	},
+	link: {
+		textDecoration: 'none',
+		color: 'white',
+	},
+	profileLink: {
+		textDecoration: 'none',
+		color: 'black',
 	},
 }));
 
@@ -157,7 +167,7 @@ export default function MapContainer(props) {
 			<CssBaseline />
 			<AppBar position='fixed' className={classes.appBar}>
 				<Toolbar>
-					<Link to='/'>
+					<Link className={classes.link} to='/'>
 						<Typography variant='h4' noWrap>
 							Local Choss
 						</Typography>
@@ -169,12 +179,12 @@ export default function MapContainer(props) {
 					{auth && (
 						<div className={classes.menuButton}>
 							{props.loggedInStatus.isLoggedIn === true ? null : (
-								<Link to='/login'>
+								<Link className={classes.link} to='/login'>
 									<Button color='inherit'>Login</Button>
 								</Link>
 							)}
 							{props.loggedInStatus.isLoggedIn === true ? null : (
-								<Link to='/signup'>
+								<Link className={classes.link} to='/signup'>
 									<Button color='inherit'>SignUp</Button>
 								</Link>
 							)}
@@ -205,10 +215,11 @@ export default function MapContainer(props) {
 								}}
 								open={open}
 								onClose={handleClose}>
-								<Link to={'/users/' + props.loggedInStatus.user.id}>
+								<Link
+									className={classes.profileLink}
+									to={'/users/' + props.loggedInStatus.user.id}>
 									<MenuItem onClick={handleClose}>Profile</MenuItem>
 								</Link>
-								<MenuItem onClick={handleClose}>My account</MenuItem>
 							</Menu>
 						</div>
 					)}
