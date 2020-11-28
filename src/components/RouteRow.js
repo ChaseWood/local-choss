@@ -34,8 +34,8 @@ export default function RouteRow(props) {
 	const classes = useStyles();
 	const { climb } = props;
 
-	// const url = 'http://localhost:3001';
-	const url = 'https://local-choss-api.herokuapp.com';
+	const url = 'http://localhost:3001';
+	// const url = 'https://local-choss-api.herokuapp.com';
 
 	const deleteClimb = () => {
 		Axios.delete(`${url}/climbs/${climb.id}`).then((res) => res.data);

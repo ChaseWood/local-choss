@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TopoVert from '../marker/TopoVert.jpg';
+import TopNavBar from '../TopNavBar';
 
 function Copyright() {
 	return (
@@ -27,6 +28,12 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '100%',
+		flexGrow: 1,
+	},
 	paper: {
 		marginTop: theme.spacing(8),
 		display: 'flex',
@@ -50,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Signup = (props) => {
+	const { loggedInStatus } = props;
 	const classes = useStyles();
 	const [creds, setCreds] = useState({
 		username: '',
@@ -59,8 +67,8 @@ const Signup = (props) => {
 		errors: '',
 	});
 
-	// const url = 'http://localhost:3001';
-	const url = 'https://local-choss-api.herokuapp.com';
+	const url = 'http://localhost:3001';
+	// const url = 'https://local-choss-api.herokuapp.com';
 
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
@@ -114,91 +122,94 @@ const Signup = (props) => {
 	};
 
 	return (
-		<Container component='main' maxWidth='xs'>
-			<CssBaseline />
-			<div className={classes.paper}>
-				<Avatar className={classes.avatar}>
-					<LockOutlinedIcon />
-				</Avatar>
-				<Typography component='h1' variant='h5'>
-					Sign up
-				</Typography>
-				<form onSubmit={handleSubmit} className={classes.form} noValidate>
-					<Grid container spacing={2}>
-						<Grid item xs={12} sm={12}>
-							<TextField
-								autoComplete='fname'
-								name='username'
-								variant='outlined'
-								required
-								fullWidth
-								id='username'
-								label='User Name'
-								autoFocus
-								onChange={handleChange}
-							/>
+		<div className={classes.root}>
+			<TopNavBar loggedInStatus={loggedInStatus} />
+			<Container component='main' maxWidth='xs'>
+				<CssBaseline />
+				<div className={classes.paper}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component='h1' variant='h5'>
+						Sign up
+					</Typography>
+					<form onSubmit={handleSubmit} className={classes.form} noValidate>
+						<Grid container spacing={2}>
+							<Grid item xs={12} sm={12}>
+								<TextField
+									autoComplete='fname'
+									name='username'
+									variant='outlined'
+									required
+									fullWidth
+									id='username'
+									label='User Name'
+									autoFocus
+									onChange={handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									variant='outlined'
+									required
+									fullWidth
+									id='email'
+									label='Email Address'
+									name='email'
+									autoComplete='email'
+									onChange={handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									variant='outlined'
+									required
+									fullWidth
+									name='password'
+									label='Password'
+									type='password'
+									id='password'
+									autoComplete='current-password'
+									onChange={handleChange}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									variant='outlined'
+									required
+									fullWidth
+									name='password_confirmation'
+									label='Confirm Password'
+									type='password'
+									id='password_confirmation'
+									autoComplete='current-password'
+									onChange={handleChange}
+								/>
+							</Grid>
 						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								id='email'
-								label='Email Address'
-								name='email'
-								autoComplete='email'
-								onChange={handleChange}
-							/>
+						<Button
+							type='submit'
+							fullWidth
+							variant='contained'
+							color='primary'
+							className={classes.submit}>
+							Sign Up
+						</Button>
+						<Grid container justify='flex-end'>
+							<Grid item>
+								<Link to='/login'>Already have an account? Sign in</Link>
+							</Grid>
 						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								name='password'
-								label='Password'
-								type='password'
-								id='password'
-								autoComplete='current-password'
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								name='password_confirmation'
-								label='Confirm Password'
-								type='password'
-								id='password_confirmation'
-								autoComplete='current-password'
-								onChange={handleChange}
-							/>
-						</Grid>
-					</Grid>
-					<Button
-						type='submit'
-						fullWidth
-						variant='contained'
-						color='primary'
-						className={classes.submit}>
-						Sign Up
-					</Button>
-					<Grid container justify='flex-end'>
-						<Grid item>
-							<Link to='/login'>Already have an account? Sign in</Link>
-						</Grid>
-					</Grid>
-				</form>
-			</div>
-			<div>
-				<div>{creds.errors ? handleErrors() : null}</div>
-			</div>
-			<Box mt={5}>
-				<Copyright />
-			</Box>
-		</Container>
+					</form>
+				</div>
+				<div>
+					<div>{creds.errors ? handleErrors() : null}</div>
+				</div>
+				<Box mt={5}>
+					<Copyright />
+				</Box>
+			</Container>
+		</div>
 	);
 };
 

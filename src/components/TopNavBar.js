@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		display: 'flex',
+		width: '100%',
 		flexGrow: 1,
 	},
 	menuButton: {
@@ -16,6 +18,20 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		flexGrow: 1,
 	},
+	appBar: {
+		backgroundColor: '#264653',
+		zIndex: theme.zIndex.drawer + 1,
+	},
+	link: {
+		textDecoration: 'none',
+		color: 'white',
+	},
+	buttonMargin: {
+		marginRight: 5,
+		marginLeft: 'auto',
+		textDecoration: 'none',
+		color: 'white',
+	},
 }));
 
 const TopNavBar = (props) => {
@@ -23,18 +39,20 @@ const TopNavBar = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position='static'>
+			<AppBar position='static' className={classes.appBar}>
 				<Toolbar>
-					<Link to='/'>
-						<Typography variant='h6' className={classes.title}>
+					<Link className={classes.link} to='/'>
+						<Typography variant='h4' noWrap>
 							Local Choss
 						</Typography>
 					</Link>
-					<Link to='/'>
-						<Button onClick={props.handleLogout} color='inherit'>
-							Sign Out
-						</Button>
-					</Link>
+					{props.loggedInStatus.isLoggedIn === true ? (
+						<Link className={classes.buttonMargin} to='/'>
+							<Button onClick={props.handleLogout} color='inherit'>
+								Sign Out
+							</Button>
+						</Link>
+					) : null}
 				</Toolbar>
 			</AppBar>
 		</div>

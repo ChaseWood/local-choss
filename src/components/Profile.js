@@ -5,18 +5,30 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import TopNavBar from './TopNavBar';
 import RouteRow from './RouteRow';
-import { PieChart, Pie, Sector, Cell, Tooltip } from 'recharts';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		width: '100%',
+		flexGrow: 1,
+	},
+	item: {
+		padding: 0,
+	},
+}));
 
 const Profile = (props) => {
-	const { handleLogout } = props;
+	const classes = useStyles();
+	const { handleLogout, loggedInStatus } = props;
 	const [userToDos, setUserToDos] = useState({});
 	const [userTickList, setUserTickList] = useState({});
 	const [removeRow, setRemoveRow] = useState(false);
 	const [piChart, setPiChart] = useState([]);
 	const [newData, setNewData] = useState([]);
 
-	// const url = 'http://localhost:3001';
-	const url = 'https://local-choss-api.herokuapp.com';
+	const url = 'http://localhost:3001';
+	// const url = 'https://local-choss-api.herokuapp.com';
 
 	const updateProfile = () => {
 		setRemoveRow(!removeRow);
@@ -80,24 +92,14 @@ const Profile = (props) => {
 	}, [removeRow]);
 
 	return (
-		<>
+		<div className={classes.root}>
 			<CssBaseline />
-			<Container maxWidth>
-				<TopNavBar handleLogout={handleLogout} />
-				<PieChart width={400} height={300}>
-					<Pie
-						dataKey='value'
-						startAngle={180}
-						endAngle={0}
-						data={newData}
-						cx={200}
-						cy={200}
-						outerRadius={80}
-						fill='#8884d8'
-						label
-					/>
-					<Tooltip />
-				</PieChart>
+			<Container classes={{ root: classes.item }}>
+				<TopNavBar
+					handleLogout={handleLogout}
+					loggedInStatus={loggedInStatus}
+				/>
+
 				<h3>Name</h3>
 				<h3>To Do List</h3>
 				{userToDos.data
@@ -121,7 +123,7 @@ const Profile = (props) => {
 					  ))
 					: null}
 			</Container>
-		</>
+		</div>
 	);
 };
 

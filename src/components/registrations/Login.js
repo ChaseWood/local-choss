@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import VerifyAlert from './VerifyAlert';
+import TopNavBar from '../TopNavBar';
 
 function Copyright() {
 	return (
@@ -30,6 +31,15 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '100%',
+		flexGrow: 1,
+	},
+	item: {
+		padding: 0,
+	},
 	paper: {
 		marginTop: theme.spacing(8),
 		display: 'flex',
@@ -59,8 +69,8 @@ const Login = (props) => {
 		errors: '',
 	});
 
-	// const url = 'http://localhost:3001';
-	const url = 'https://local-choss-api.herokuapp.com';
+	const url = 'http://localhost:3001';
+	// const url = 'https://local-choss-api.herokuapp.com';
 
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
@@ -116,80 +126,84 @@ const Login = (props) => {
 	};
 
 	return (
-		<Container component='main' maxWidth='xs'>
-			<CssBaseline />
-			<div className={classes.paper}>
-				<Avatar className={classes.avatar}>
-					<LockOutlinedIcon />
-				</Avatar>
-				<Typography component='h1' variant='h5'>
-					Sign in
-				</Typography>
-				<form onSubmit={handleSubmit} className={classes.form} noValidate>
-					<TextField
-						variant='outlined'
-						margin='normal'
-						required
-						fullWidth
-						id='username'
-						label='User Name'
-						name='username'
-						autoComplete='user-name'
-						autoFocus
-						onChange={handleChange}
-					/>
-					<TextField
-						variant='outlined'
-						margin='normal'
-						required
-						fullWidth
-						id='email'
-						label='Email Address'
-						name='email'
-						autoComplete='email'
-						autoFocus
-						onChange={handleChange}
-					/>
-					<TextField
-						variant='outlined'
-						margin='normal'
-						required
-						fullWidth
-						name='password'
-						label='Password'
-						type='password'
-						id='password'
-						autoComplete='current-password'
-						onChange={handleChange}
-					/>
+		<div className={classes.root}>
+			<TopNavBar loggedInStatus={loggedInStatus} />
+			<Container component='main' maxWidth='xs'>
+				<CssBaseline />
 
-					<Button
-						type='submit'
-						fullWidth
-						variant='contained'
-						color='primary'
-						className={classes.submit}>
-						Sign In
-					</Button>
-					<Grid container>
-						{/* <Grid item xs>
+				<div className={classes.paper}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component='h1' variant='h5'>
+						Sign in
+					</Typography>
+					<form onSubmit={handleSubmit} className={classes.form} noValidate>
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							id='username'
+							label='User Name'
+							name='username'
+							autoComplete='user-name'
+							autoFocus
+							onChange={handleChange}
+						/>
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							id='email'
+							label='Email Address'
+							name='email'
+							autoComplete='email'
+							autoFocus
+							onChange={handleChange}
+						/>
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							name='password'
+							label='Password'
+							type='password'
+							id='password'
+							autoComplete='current-password'
+							onChange={handleChange}
+						/>
+
+						<Button
+							type='submit'
+							fullWidth
+							variant='contained'
+							color='primary'
+							className={classes.submit}>
+							Sign In
+						</Button>
+						<Grid container>
+							{/* <Grid item xs>
 							<Link href='#' variant='body2'>
 								Forgot password?
 							</Link>
 						</Grid> */}
-						<Grid item>
-							<Link to='/signup'>{"Don't have an account? Sign Up"}</Link>
+							<Grid item>
+								<Link to='/signup'>{"Don't have an account? Sign Up"}</Link>
+							</Grid>
 						</Grid>
-					</Grid>
-				</form>
-			</div>
-			<div>
-				<div>{creds.errors ? handleErrors() : null}</div>
-			</div>
-			<Box mt={8}>
-				<Copyright />
-			</Box>
-		</Container>
+					</form>
+				</div>
+				<div>
+					<div>{creds.errors ? handleErrors() : null}</div>
+				</div>
+				<Box mt={8}>
+					<Copyright />
+				</Box>
+			</Container>
+		</div>
 	);
 };
 
