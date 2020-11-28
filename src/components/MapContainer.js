@@ -241,7 +241,7 @@ export default function MapContainer(props) {
 				<div className={classes.drawerContainer}>
 					<List>
 						<Typography variant='h3' className={classes.routeText}>
-							Search to see routes!
+							Search to view climbs within 10 miles!
 						</Typography>
 						<Divider />
 						{props.climbs.routes
@@ -251,20 +251,24 @@ export default function MapContainer(props) {
 											<Typography variant='body2' className={classes.routeText}>
 												{route.name}
 											</Typography>
-											<Button
-												className={classes.buttonMargin}
-												size='small'
-												variant='contained'
-												text='Set To-Do'
-												onClick={() => setToDo(route)}>
-												To-Do
-											</Button>
-											<Button
-												size='small'
-												onClick={() => handleTickList(route)}
-												variant='contained'>
-												Tick
-											</Button>
+											{props.loggedInStatus.isLoggedIn === true ? (
+												<>
+													<Button
+														className={classes.buttonMargin}
+														size='small'
+														variant='contained'
+														text='Set To-Do'
+														onClick={() => setToDo(route)}>
+														To-Do
+													</Button>
+													<Button
+														size='small'
+														onClick={() => handleTickList(route)}
+														variant='contained'>
+														Tick
+													</Button>
+												</>
+											) : null}
 										</ListItem>
 										<Divider />
 									</>

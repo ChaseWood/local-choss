@@ -6,15 +6,26 @@ import Container from '@material-ui/core/Container';
 import TopNavBar from './TopNavBar';
 import RouteRow from './RouteRow';
 import { makeStyles } from '@material-ui/core/styles';
+import UserCard from './UserCard';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
+	rootColumn: {
 		display: 'flex',
+		flexDirection: 'column',
+		flexGrow: 1,
+	},
+	rootRow: {
+		display: 'flex',
+		flexDirection: 'row',
 		width: '100%',
 		flexGrow: 1,
 	},
-	item: {
-		padding: 0,
+
+	container: {
+		display: 'flex',
+	},
+	userCard: {
+		height: 'fit-content',
 	},
 }));
 
@@ -92,37 +103,38 @@ const Profile = (props) => {
 	}, [removeRow]);
 
 	return (
-		<div className={classes.root}>
-			<CssBaseline />
-			<Container classes={{ root: classes.item }}>
-				<TopNavBar
-					handleLogout={handleLogout}
-					loggedInStatus={loggedInStatus}
-				/>
+		<div className={classes.rootColumn}>
+			<TopNavBar handleLogout={handleLogout} loggedInStatus={loggedInStatus} />
+			<div className={classes.rootRow}>
+				<CssBaseline />
+				<div style={{ padding: 20 }}>
+					<UserCard loggedInStatus={loggedInStatus} />
+				</div>
+				<Container>
+					<h3>Name</h3>
+					<h3>To Do List</h3>
+					{userToDos.data
+						? userToDos.data.map((climb) => (
+								<RouteRow
+									deleteClimb={getUserToDos}
+									climb={climb}
+									setRemoveRow={updateProfile}
+								/>
+						  ))
+						: null}
 
-				<h3>Name</h3>
-				<h3>To Do List</h3>
-				{userToDos.data
-					? userToDos.data.map((climb) => (
-							<RouteRow
-								deleteClimb={getUserToDos}
-								climb={climb}
-								setRemoveRow={updateProfile}
-							/>
-					  ))
-					: null}
-
-				<h3>Tick List</h3>
-				{userTickList.data
-					? userTickList.data.map((climb) => (
-							<RouteRow
-								deleteClimb={getUserTickList}
-								climb={climb}
-								setRemoveRow={updateProfile}
-							/>
-					  ))
-					: null}
-			</Container>
+					<h3>Tick List</h3>
+					{userTickList.data
+						? userTickList.data.map((climb) => (
+								<RouteRow
+									deleteClimb={getUserTickList}
+									climb={climb}
+									setRemoveRow={updateProfile}
+								/>
+						  ))
+						: null}
+				</Container>
+			</div>
 		</div>
 	);
 };

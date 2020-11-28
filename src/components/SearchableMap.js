@@ -1,7 +1,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import React, { useState } from 'react';
-import MapGL, { Marker, Popup } from 'react-map-gl';
+import MapGL, { Marker, Popup, StaticMap } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import Icon from './marker/marker.png';
@@ -15,7 +15,7 @@ const SearchableMap = (props) => {
 		zoom: 1,
 	});
 	const [searchResultsLayer, setSearchResultsLayer] = useState(null);
-	const [showPopup, setShowPopup] = useState({ showPopup: true });
+	const [selectedHotSpot, setSelectedHotSpot] = useState(null);
 
 	const mapStyle = {
 		float: 'right',
@@ -57,16 +57,6 @@ const SearchableMap = (props) => {
 				height='100%'
 				onViewportChange={handleViewportChange}
 				mapboxApiAccessToken={TOKEN}>
-				{showPopup && (
-					<Popup
-						latitude={37.78}
-						longitude={-122.41}
-						closeOnClick={false}
-						onClose={() => setShowPopup({ showPopup: false })}
-						anchor='top'>
-						<div>You are here</div>
-					</Popup>
-				)}
 				<Geocoder
 					mapRef={mapRef}
 					onResult={handleOnResult}
@@ -74,31 +64,51 @@ const SearchableMap = (props) => {
 					mapboxApiAccessToken={TOKEN}
 					position='top-left'
 				/>
-				{props.locations.latitude ? (
-					<Marker
-						offsetLeft={-20}
-						offsetTop={-20}
-						key={props.locations.latitude}
-						latitude={props.locations.latitude}
-						longitude={props.locations.longitude}>
-						<img src={Icon} alt='ICON' />
-					</Marker>
-				) : (
-					<div></div>
-				)}
-				{props.climbs.routes
-					? props.climbs.routes.map((location) => (
-							<Marker
-								offsetLeft={-20}
-								offsetTop={-20}
-								key={location.id}
-								latitude={location.latitude}
-								longitude={location.longitude}>
-								<img src={Icon} alt='ICON' />
-							</Marker>
-					  ))
-					: null}
-				<DeckGL {...viewport} layers={[searchResultsLayer]} />
+				<DeckGL {...viewport} layers={[searchResultsLayer]}>
+					{props.locations.latitude ? (
+						<Marker
+							offsetLeft={-20}
+							offsetTop={-20}
+							key={props.locations.latitude}
+							latitude={props.locations.latitude}
+							longitude={props.locations.longitude}>
+							<img src={Icon} alt='ICON' />
+						</Marker>
+					) : (
+						<div></div>
+					)}
+					{props.climbs.routes
+						? props.climbs.routes.map((location) => (
+								<Marker
+									offsetLeft={-20}
+									offsetTop={-20}
+									key={location.id}
+									latitude={location.latitude}
+									longitude={location.longitude}>
+									<img
+										onClick={() => {
+											setSelectedHotSpot(location);
+										}}
+										src={Icon}
+										alt='ICON'
+									/>
+								</Marker>
+						  ))
+						: null}
+					{selectedHotSpot !== null ? (
+						<Popup
+							latitude={selectedHotSpot.latitude}
+							longitude={selectedHotSpot.longitude}
+							closeOnClick={false}
+							onClose={() => setSelectedHotSpot(null)}
+							anchor='top'>
+							<div>{selectedHotSpot.name}</div>
+							<div>{selectedHotSpot.type}</div>
+							<div>{selectedHotSpot.rating}</div>
+							<div>{selectedHotSpot.stars} Stars</div>
+						</Popup>
+					) : null}
+				</DeckGL>
 			</MapGL>
 		</div>
 	);
