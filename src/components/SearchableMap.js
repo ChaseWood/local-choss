@@ -1,7 +1,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import React, { useState } from 'react';
-import MapGL, { Marker } from 'react-map-gl';
+import MapGL, { Marker, Popup } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import Icon from './marker/marker.png';
@@ -15,6 +15,7 @@ const SearchableMap = (props) => {
 		zoom: 1,
 	});
 	const [searchResultsLayer, setSearchResultsLayer] = useState(null);
+	const [showPopup, setShowPopup] = useState({ showPopup: true });
 
 	const mapStyle = {
 		float: 'right',
@@ -56,6 +57,16 @@ const SearchableMap = (props) => {
 				height='100%'
 				onViewportChange={handleViewportChange}
 				mapboxApiAccessToken={TOKEN}>
+				{showPopup && (
+					<Popup
+						latitude={37.78}
+						longitude={-122.41}
+						closeOnClick={false}
+						onClose={() => setShowPopup({ showPopup: false })}
+						anchor='top'>
+						<div>You are here</div>
+					</Popup>
+				)}
 				<Geocoder
 					mapRef={mapRef}
 					onResult={handleOnResult}

@@ -75,13 +75,8 @@ const useStyles = makeStyles((theme) => ({
 export default function MapContainer(props) {
 	const classes = useStyles();
 	///////////////added states and functions/////////////
-	const [auth, setAuth] = React.useState(true);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
-
-	const handleChange = (event) => {
-		setAuth(event.target.checked);
-	};
 
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -181,53 +176,52 @@ export default function MapContainer(props) {
 					</Link>
 
 					{/*/////////// Login and profile buttons ///////////*/}
-					{auth && (
-						<div className={classes.menuButton}>
-							{props.loggedInStatus.isLoggedIn === true ? null : (
-								<Link className={classes.link} to='/login'>
-									<Button color='inherit'>Login</Button>
-								</Link>
-							)}
-							{props.loggedInStatus.isLoggedIn === true ? null : (
-								<Link className={classes.link} to='/signup'>
-									<Button color='inherit'>SignUp</Button>
-								</Link>
-							)}
-							{props.loggedInStatus.isLoggedIn === true ? (
-								<Button onClick={handleLogoutClick} color='inherit'>
-									logout
-								</Button>
-							) : null}
-							<IconButton
-								aria-label='account of current user'
-								aria-controls='menu-appbar'
-								aria-haspopup='true'
-								onClick={handleMenu}
-								color='inherit'>
-								<AccountCircle />
-							</IconButton>
-							<Menu
-								id='menu-appbar'
-								anchorEl={anchorEl}
-								anchorOrigin={{
-									vertical: 'top',
-									horizontal: 'right',
-								}}
-								keepMounted
-								transformOrigin={{
-									vertical: 'top',
-									horizontal: 'right',
-								}}
-								open={open}
-								onClose={handleClose}>
-								<Link
-									className={classes.profileLink}
-									to={'/users/' + props.loggedInStatus.user.id}>
-									<MenuItem onClick={handleClose}>Profile</MenuItem>
-								</Link>
-							</Menu>
-						</div>
-					)}
+
+					<div className={classes.menuButton}>
+						{props.loggedInStatus.isLoggedIn === true ? null : (
+							<Link className={classes.link} to='/login'>
+								<Button color='inherit'>Login</Button>
+							</Link>
+						)}
+						{props.loggedInStatus.isLoggedIn === true ? null : (
+							<Link className={classes.link} to='/signup'>
+								<Button color='inherit'>SignUp</Button>
+							</Link>
+						)}
+						{props.loggedInStatus.isLoggedIn === true ? (
+							<Button onClick={handleLogoutClick} color='inherit'>
+								logout
+							</Button>
+						) : null}
+						<IconButton
+							aria-label='account of current user'
+							aria-controls='menu-appbar'
+							aria-haspopup='true'
+							onClick={handleMenu}
+							color='inherit'>
+							<AccountCircle />
+						</IconButton>
+						<Menu
+							id='menu-appbar'
+							anchorEl={anchorEl}
+							anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							open={open}
+							onClose={handleClose}>
+							<Link
+								className={classes.profileLink}
+								to={'/users/' + props.loggedInStatus.user.id}>
+								<MenuItem onClick={handleClose}>Profile</MenuItem>
+							</Link>
+						</Menu>
+					</div>
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -239,6 +233,10 @@ export default function MapContainer(props) {
 				<Toolbar />
 				<div className={classes.drawerContainer}>
 					<List>
+						<Typography variant='h3' className={classes.routeText}>
+							Search to see routes!
+						</Typography>
+						<Divider />
 						{props.climbs.routes
 							? props.climbs.routes.map((route) => (
 									<>

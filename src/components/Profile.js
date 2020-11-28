@@ -5,12 +5,15 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import TopNavBar from './TopNavBar';
 import RouteRow from './RouteRow';
+import { PieChart, Pie, Sector, Cell, Tooltip } from 'recharts';
 
 const Profile = (props) => {
 	const { handleLogout } = props;
 	const [userToDos, setUserToDos] = useState({});
 	const [userTickList, setUserTickList] = useState({});
 	const [removeRow, setRemoveRow] = useState(false);
+	const [piChart, setPiChart] = useState([]);
+	const [newData, setNewData] = useState([]);
 
 	const updateProfile = () => {
 		setRemoveRow(!removeRow);
@@ -44,6 +47,33 @@ const Profile = (props) => {
 			);
 	};
 
+	const getUserPiChart = () => {
+		axios
+			.get(`http://localhost:3001/getuserchart/${props.match.params.id}`)
+			.then(
+				(response) => {
+					setPiChart(response.data);
+					console.log('this is users climbing data', response);
+				},
+				(error) => {
+					console.log('error:', error);
+				}
+			);
+	};
+
+	useEffect(() => {
+		setNewData(
+			Object.keys(piChart).map((key) => ({
+				name: String(key),
+				value: piChart[key],
+			}))
+		);
+	}, [removeRow]);
+
+	useEffect(() => {
+		getUserPiChart();
+	}, [removeRow]);
+
 	useEffect(() => {
 		getUserToDos();
 	}, [removeRow]);
@@ -57,6 +87,20 @@ const Profile = (props) => {
 			<CssBaseline />
 			<Container maxWidth>
 				<TopNavBar handleLogout={handleLogout} />
+				<PieChart width={400} height={300}>
+					<Pie
+						dataKey='value'
+						startAngle={180}
+						endAngle={0}
+						data={newData}
+						cx={200}
+						cy={200}
+						outerRadius={80}
+						fill='#8884d8'
+						label
+					/>
+					<Tooltip />
+				</PieChart>
 				<h3>Name</h3>
 				<h3>To Do List</h3>
 				{userToDos.data

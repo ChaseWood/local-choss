@@ -27,7 +27,7 @@ const TopNavBar = (props) => {
 				<Toolbar>
 					<Link to='/'>
 						<Typography variant='h6' className={classes.title}>
-							News
+							Local Choss
 						</Typography>
 					</Link>
 					<Link to='/'>
