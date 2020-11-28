@@ -9,8 +9,8 @@ import Signup from './components/registrations/Signup';
 import Profile from './components/Profile';
 
 function App() {
-	const url = 'http://localhost:3001/climbs';
-	// const url = 'https://local-choss-api.herokuapp.com/';
+	// const url = 'http://localhost:3001/climbs';
+	const url = 'https://local-choss-api.herokuapp.com/climbs';
 
 	//handling if the user is logged in or not
 	const [isLoggedIn, setIsLoggedIn] = useState({

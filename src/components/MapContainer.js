@@ -78,6 +78,9 @@ export default function MapContainer(props) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
 
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
+
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -88,7 +91,7 @@ export default function MapContainer(props) {
 
 	const handleLogoutClick = () => {
 		axios
-			.delete('http://localhost:3001/logout', { withCredentials: true })
+			.delete(`${url}/logout`, { withCredentials: true })
 			.then((response) => {
 				props.handleLogout();
 				props.history.push('/');
@@ -111,7 +114,8 @@ export default function MapContainer(props) {
 		console.log('this is setToDo', climb);
 		axios({
 			method: 'post',
-			url: `http://localhost:3001/settodo/${props.loggedInStatus.user.id}/${climb.id}`,
+			// url: `http://localhost:3001/settodo/${props.loggedInStatus.user.id}/${climb.id}`,
+			url: `https://local-choss-api.herokuapp.com/settodo/${props.loggedInStatus.user.id}/${climb.id}`,
 			data: {
 				user_id: props.loggedInStatus.user.id,
 				route_id: climb.id,
@@ -139,7 +143,8 @@ export default function MapContainer(props) {
 	const handleTickList = (tick) => {
 		axios({
 			method: 'post',
-			url: `http://localhost:3001/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
+			// url: `http://localhost:3001/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
+			url: `http://local-choss-api.herokuapp.com/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
 			data: {
 				user_id: props.loggedInStatus.user.id,
 				route_id: tick.id,

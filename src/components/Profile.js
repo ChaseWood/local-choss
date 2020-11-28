@@ -15,50 +15,47 @@ const Profile = (props) => {
 	const [piChart, setPiChart] = useState([]);
 	const [newData, setNewData] = useState([]);
 
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
+
 	const updateProfile = () => {
 		setRemoveRow(!removeRow);
 	};
 
 	const getUserToDos = () => {
-		axios
-			.get(`http://localhost:3001/gettodolist/${props.match.params.id}`)
-			.then(
-				(response) => {
-					setUserToDos(response);
-					console.log('this is users climbing data', response);
-				},
-				(error) => {
-					console.log('error:', error);
-				}
-			);
+		axios.get(`${url}/gettodolist/${props.match.params.id}`).then(
+			(response) => {
+				setUserToDos(response);
+				console.log('this is users climbing data', response);
+			},
+			(error) => {
+				console.log('error:', error);
+			}
+		);
 	};
 
 	const getUserTickList = () => {
-		axios
-			.get(`http://localhost:3001/getticklist/${props.match.params.id}`)
-			.then(
-				(response) => {
-					setUserTickList(response);
-					console.log('this is users climbing data', response);
-				},
-				(error) => {
-					console.log('error:', error);
-				}
-			);
+		axios.get(`${url}/getticklist/${props.match.params.id}`).then(
+			(response) => {
+				setUserTickList(response);
+				console.log('this is users climbing data', response);
+			},
+			(error) => {
+				console.log('error:', error);
+			}
+		);
 	};
 
 	const getUserPiChart = () => {
-		axios
-			.get(`http://localhost:3001/getuserchart/${props.match.params.id}`)
-			.then(
-				(response) => {
-					setPiChart(response.data);
-					console.log('this is users climbing data', response);
-				},
-				(error) => {
-					console.log('error:', error);
-				}
-			);
+		axios.get(`${url}/getuserchart/${props.match.params.id}`).then(
+			(response) => {
+				setPiChart(response.data);
+				console.log('this is users climbing data', response);
+			},
+			(error) => {
+				console.log('error:', error);
+			}
+		);
 	};
 
 	useEffect(() => {

@@ -59,6 +59,9 @@ const Login = (props) => {
 		errors: '',
 	});
 
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
+
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
 	};
@@ -73,7 +76,7 @@ const Login = (props) => {
 		};
 
 		axios
-			.post('http://localhost:3001/login', { user }, { withCredentials: true })
+			.post(`${url}/login`, { user }, { withCredentials: true })
 			.then((response) => {
 				if (response.data.logged_in === true) {
 					props.handleLogin(response.data);

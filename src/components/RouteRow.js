@@ -34,10 +34,11 @@ export default function RouteRow(props) {
 	const classes = useStyles();
 	const { climb } = props;
 
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
+
 	const deleteClimb = () => {
-		Axios.delete(`http://localhost:3001/climbs/${climb.id}`).then(
-			(res) => res.data
-		);
+		Axios.delete(`${url}/climbs/${climb.id}`).then((res) => res.data);
 		props.deleteClimb();
 		props.setRemoveRow();
 	};

@@ -59,6 +59,9 @@ const Signup = (props) => {
 		errors: '',
 	});
 
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
+
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
 	};
@@ -80,7 +83,7 @@ const Signup = (props) => {
 		};
 
 		axios
-			.post('http://localhost:3001/users', { user }, { withCredentials: true })
+			.post(`${url}/users`, { user }, { withCredentials: true })
 			.then((response) => {
 				if (response.data.status === 'created') {
 					props.handleLogin(response.data);
