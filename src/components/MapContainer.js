@@ -144,7 +144,7 @@ export default function MapContainer(props) {
 		axios({
 			method: 'post',
 			// url: `http://localhost:3001/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
-			url: `http://local-choss-api.herokuapp.com/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
+			url: `https://local-choss-api.herokuapp.com/setticklist/${props.loggedInStatus.user.id}/${tick.id}`,
 			data: {
 				user_id: props.loggedInStatus.user.id,
 				route_id: tick.id,
