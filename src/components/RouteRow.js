@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingRight: 20,
 	},
 	location: {
-		fontSize: 14,
+		fontSize: 12,
 		fontWeight: 'fontWeightLight',
 		textAlign: 'left',
 	},
@@ -59,15 +59,15 @@ export default function RouteRow(props) {
 					<Typography variant='h6' className={classes.title}>
 						{climb.name}
 					</Typography>
-					{/* {climb.location.map((location) => (
-						<Typography className={classes.location}>{location}/</Typography>
-					))} */}
 					<Typography variant='subtitle2' className={classes.title}>
 						{climb.rating}
 					</Typography>
 					<Typography variant='subtitle2' className={classes.title}>
 						{climb.style}
 					</Typography>
+					{climb.location.map((location) => (
+						<Typography className={classes.location}>{location}/</Typography>
+					))}
 					<Typography variant='subtitle2' className={classes.stars}>
 						{climb.stars}
 					</Typography>

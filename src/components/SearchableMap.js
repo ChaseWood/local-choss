@@ -28,7 +28,6 @@ const SearchableMap = (props) => {
 			...viewport,
 			...newViewport,
 		});
-		// props.handleCoords(viewport.latitude, viewport.longitude);
 	};
 
 	const handleOnResult = (event) => {
