@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Local Choss
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Local Choss](https://angry-jones-963184.netlify.app/),
+an application for searching, finding, and saving rock climbs within a specified area anywhere in the world.
 
-## Available Scripts
+![Image](https://i.imgur.com/h1i7Ywz.png)
 
-In the project directory, you can run:
+## Current Features
 
-### `yarn start`
+- Users can search for climbs.
+- Users can click the marker on any climb and get more information about that climb.
+- Users can signup for an account.
+- With an account users can save climbs to two different lists. A to-do list and a "tick" list which means that the user has climbed that route.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies Used
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- Ruby/Rails
+- Mapbox
+- Material UI
 
-### `yarn test`
+## Installation Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To set up the app locally on your own system:
 
-### `yarn build`
+1. Fork and Clone this repo as it is the front end.
+2. Install all dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+    yarn install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Fork and clone the back end [here](https://github.com/ChaseWood/local-choss-api).
+4. Install all dependencies.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+    bundle install
+```
 
-### `yarn eject`
+5. Ensure you have PostgreSQL installed and running. Then, set up your database.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+    rails db:create
+    rails db:migrate
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. Start up your front end server and navigate to the indicated port.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+    yarn start
+    http://localhost:3000
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+7. Start up your rails server.
 
-## Learn More
+```
+    rails s
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+8. Congrats Local Choss should be set up on your machine locally!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to Contribute
 
-### Code Splitting
+1. Clone Repo and create a new branch:
+2. Make Changes and test
+3. Submit a Pull Request with comprehensive description of changes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Acknowledgements
 
-### Analyzing the Bundle Size
+Below is a short list of tutorials and other helpful links I utilized to get this web application up and running in no particular order.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- https://medium.com/better-programming/getting-started-with-react-and-mapbox-gl-js-using-popup-component-with-marker-d76c72824423
+- https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
+- https://www.freecodecamp.org/news/how-to-persist-a-logged-in-user-in-react/
+- https://dev.to/alexmercedcoder/deploying-ruby-on-rails-to-heroku-it-s-easy-ho8
+- https://blog.logrocket.com/how-to-use-mapbox-gl/
+- https://medium.com/@mendes.develop/populating-your-tables-using-data-from-an-external-api-with-rest-client-and-ruby-on-rails-62817099ff90
+- https://stackoverflow.com/questions/32409820/add-an-array-column-in-rails/32410318
+- https://excalidraw.com/
