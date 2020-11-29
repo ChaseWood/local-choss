@@ -15,20 +15,18 @@ import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
-import TopoMap from './marker/TopoVert.jpg';
 import SearchableMap from '../components/SearchableMap';
 
-const drawerWidth = 350;
+const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
-		width: '100%',
+		// width: '100%',
 		flexGrow: 1,
 	},
 	appBar: {
 		backgroundColor: '#264653',
-		// background: `url(${TopoMap})`,
 		zIndex: theme.zIndex.drawer + 1,
 	},
 	drawer: {
@@ -36,8 +34,7 @@ const useStyles = makeStyles((theme) => ({
 		flexShrink: 0,
 	},
 	drawerPaper: {
-		// background: `url(${TopoMap})`,
-		backgroundColor: '#e9c46a',
+		backgroundColor: '#f4f0ea',
 		width: drawerWidth,
 	},
 	drawerContainer: {
@@ -65,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	routeText: {
 		fontSize: '2',
+		paddingRight: 10,
 	},
 	buttonMargin: {
 		marginRight: 5,
@@ -240,16 +238,27 @@ export default function MapContainer(props) {
 				<Toolbar />
 				<div className={classes.drawerContainer}>
 					<List>
-						<Typography variant='h3' className={classes.routeText}>
-							Search to view climbs within 10 miles!
+						<Typography variant='h4' className={classes.routeText}>
+							Climbs in Selected Area
 						</Typography>
+						{props.loggedInStatus.isLoggedIn === true ? null : (
+							<Typography variant='h6' className={classes.routeText}>
+								SignUp to Save Your Climbs
+							</Typography>
+						)}
 						<Divider />
 						{props.climbs.routes
 							? props.climbs.routes.map((route) => (
 									<>
 										<ListItem button key={route.name}>
-											<Typography variant='body2' className={classes.routeText}>
+											<Typography variant='body1' className={classes.routeText}>
 												{route.name}
+											</Typography>
+											<Typography variant='body2' className={classes.routeText}>
+												{route.rating}
+											</Typography>
+											<Typography variant='body2' className={classes.routeText}>
+												{route.stars} Stars
 											</Typography>
 											{props.loggedInStatus.isLoggedIn === true ? (
 												<>
@@ -284,6 +293,8 @@ export default function MapContainer(props) {
 					handleCoords={props.handleCoords}
 					climbs={props.climbs}
 					locations={props.locations}
+					setToDo={setToDo}
+					handleTickList={handleTickList}
 				/>
 			</main>
 		</div>

@@ -33,7 +33,6 @@ const SearchableMap = (props) => {
 
 	const handleOnResult = (event) => {
 		props.handleCoords(event.result.center[0], event.result.center[1]);
-		console.log('this is handleOnResult', event);
 		setSearchResultsLayer(
 			new GeoJsonLayer({
 				id: 'search-result',
@@ -106,6 +105,16 @@ const SearchableMap = (props) => {
 							<div>{selectedHotSpot.type}</div>
 							<div>{selectedHotSpot.rating}</div>
 							<div>{selectedHotSpot.stars} Stars</div>
+							<button
+								text='Set To-Do'
+								onClick={() => props.setToDo(selectedHotSpot)}>
+								To-Do
+							</button>
+							<button
+								text='Set To-Do'
+								onClick={() => props.handleTickList(selectedHotSpot)}>
+								Tick
+							</button>
 						</Popup>
 					) : null}
 				</DeckGL>

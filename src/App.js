@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import axios from 'axios';
 import './App.css';
 import MapContainer from './components/MapContainer';
 import Home from './components/Home';
@@ -85,6 +84,7 @@ function App() {
 	const [climbs, setClimbs] = useState([]);
 
 	//api call made to get climbs close to location from search
+
 	useEffect(() => {
 		fetch(`${url}/${locations.latitude}/${locations.longitude}`)
 			.then((res) => res.json())

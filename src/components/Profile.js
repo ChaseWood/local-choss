@@ -6,19 +6,24 @@ import Container from '@material-ui/core/Container';
 import TopNavBar from './TopNavBar';
 import RouteRow from './RouteRow';
 import { makeStyles } from '@material-ui/core/styles';
+import TopoMap from './marker/TopoVert.jpg';
 import UserCard from './UserCard';
+import '../../node_modules/react-vis/dist/style.css';
+import { RadialChart } from 'react-vis';
 
 const useStyles = makeStyles((theme) => ({
 	rootColumn: {
 		display: 'flex',
 		flexDirection: 'column',
 		flexGrow: 1,
+		background: `url(${TopoMap})`,
 	},
 	rootRow: {
 		display: 'flex',
 		flexDirection: 'row',
 		width: '100%',
 		flexGrow: 1,
+		height: '100vh',
 	},
 
 	container: {
@@ -69,6 +74,8 @@ const Profile = (props) => {
 		);
 	};
 
+	//this data is for a pie chart but I cant get one to load on page load for
+	// some strange reason...
 	const getUserPiChart = () => {
 		axios.get(`${url}/getuserchart/${props.match.params.id}`).then(
 			(response) => {
@@ -81,11 +88,13 @@ const Profile = (props) => {
 		);
 	};
 
+	// this is for data that is to be sent to a chart, but i cant get one to load
+	// when the page loads and it will only load after removing a row for some reason
 	useEffect(() => {
 		setNewData(
 			Object.keys(piChart).map((key) => ({
-				name: String(key),
-				value: piChart[key],
+				label: String(key),
+				angle: piChart[key],
 			}))
 		);
 	}, [removeRow]);
@@ -105,14 +114,26 @@ const Profile = (props) => {
 	return (
 		<div className={classes.rootColumn}>
 			<TopNavBar handleLogout={handleLogout} loggedInStatus={loggedInStatus} />
+
 			<div className={classes.rootRow}>
 				<CssBaseline />
 				<div style={{ padding: 20 }}>
 					<UserCard loggedInStatus={loggedInStatus} />
 				</div>
 				<Container>
-					<h3>Name</h3>
-					<h3>To Do List</h3>
+					{/* {newData ? (
+						<RadialChart
+							data={newData}
+							width={300}
+							height={300}
+							labelsRadiusMultiplier={1.1}
+							labelsStyle={{
+								fontSize: 12,
+							}}
+							showLabels
+						/>
+					) : null} */}
+					<h1>To Do List</h1>
 					{userToDos.data
 						? userToDos.data.map((climb) => (
 								<RouteRow
@@ -123,7 +144,7 @@ const Profile = (props) => {
 						  ))
 						: null}
 
-					<h3>Tick List</h3>
+					<h1>Tick List</h1>
 					{userTickList.data
 						? userTickList.data.map((climb) => (
 								<RouteRow

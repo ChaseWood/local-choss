@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(2),
 	},
 	title: {
+		paddingLeft: 10,
 		paddingRight: 20,
 	},
 	location: {
@@ -27,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 	remove: {
 		marginLeft: 'auto',
+	},
+	stars: {
+		marginLeft: 'auto',
+	},
+	appBar: {
+		backgroundColor: '#e9c46a',
+		color: 'black',
 	},
 }));
 
@@ -45,26 +53,26 @@ export default function RouteRow(props) {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position='static'>
+			<AppBar position='static' className={classes.appBar}>
 				<Toolbar>
 					<FilterHdrIcon />
 					<Typography variant='h6' className={classes.title}>
 						{climb.name}
 					</Typography>
-					{climb.location.map((location) => (
+					{/* {climb.location.map((location) => (
 						<Typography className={classes.location}>{location}/</Typography>
-					))}
-					<Typography variant='h6' className={classes.title}>
+					))} */}
+					<Typography variant='subtitle2' className={classes.title}>
 						{climb.rating}
 					</Typography>
-					<Typography variant='h6' className={classes.title}>
-						{climb.stars}
-						<StarIcon />
+					<Typography variant='subtitle2' className={classes.title}>
+						{climb.style}
 					</Typography>
-					<Button
-						className={classes.remove}
-						onClick={deleteClimb}
-						color='inherit'>
+					<Typography variant='subtitle2' className={classes.stars}>
+						{climb.stars}
+					</Typography>
+					<StarIcon />
+					<Button onClick={deleteClimb} color='inherit'>
 						Remove
 					</Button>
 				</Toolbar>
