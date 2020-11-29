@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import MapContainer from './components/MapContainer';
-import Home from './components/Home';
 import Login from './components/registrations/Login';
 import Signup from './components/registrations/Signup';
 import Profile from './components/Profile';
 
 function App() {
-	const url = 'http://localhost:3001/climbs';
-	// const url = 'https://local-choss-api.herokuapp.com/climbs';
+	// const url = 'http://localhost:3001/climbs';
+	const url = 'https://local-choss-api.herokuapp.com/climbs';
 
 	//handling if the user is logged in or not
 	const [isLoggedIn, setIsLoggedIn] = useState({
@@ -100,17 +99,6 @@ function App() {
 	return (
 		<div style={{ display: 'flex' }}>
 			<Switch>
-				<Route
-					exact
-					path='/home'
-					render={(rp) => (
-						<Home
-							{...rp}
-							handleLogout={handleLogout}
-							loggedInStatus={isLoggedIn}
-						/>
-					)}
-				/>
 				<Route
 					exact
 					path='/login'

@@ -4,8 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import StarIcon from '@material-ui/icons/Star';
 import Axios from 'axios';
@@ -42,8 +40,8 @@ export default function RouteRow(props) {
 	const classes = useStyles();
 	const { climb } = props;
 
-	const url = 'http://localhost:3001';
-	// const url = 'https://local-choss-api.herokuapp.com';
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
 
 	const deleteClimb = () => {
 		Axios.delete(`${url}/climbs/${climb.id}`).then((res) => res.data);

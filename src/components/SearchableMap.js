@@ -1,7 +1,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import React, { useState } from 'react';
-import MapGL, { Marker, Popup, StaticMap } from 'react-map-gl';
+import MapGL, { Marker, Popup } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import Icon from './marker/marker.png';

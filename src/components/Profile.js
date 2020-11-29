@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import TopNavBar from './TopNavBar';
 import RouteRow from './RouteRow';
@@ -9,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TopoMap from './marker/TopoVert.jpg';
 import UserCard from './UserCard';
 import '../../node_modules/react-vis/dist/style.css';
-import { RadialChart } from 'react-vis';
 
 const useStyles = makeStyles((theme) => ({
 	rootColumn: {
@@ -43,8 +41,8 @@ const Profile = (props) => {
 	const [piChart, setPiChart] = useState([]);
 	const [newData, setNewData] = useState([]);
 
-	const url = 'http://localhost:3001';
-	// const url = 'https://local-choss-api.herokuapp.com';
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
 
 	const updateProfile = () => {
 		setRemoveRow(!removeRow);

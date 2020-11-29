@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.secondary.main,
 	},
 	form: {
-		width: '100%', // Fix IE 11 issue.
+		width: '100%',
 		marginTop: theme.spacing(3),
 	},
 	submit: {
@@ -67,8 +67,8 @@ const Signup = (props) => {
 		errors: '',
 	});
 
-	const url = 'http://localhost:3001';
-	// const url = 'https://local-choss-api.herokuapp.com';
+	// const url = 'http://localhost:3001';
+	const url = 'https://local-choss-api.herokuapp.com';
 
 	const handleChange = (event) => {
 		setCreds({ ...creds, [event.target.name]: event.target.value });
