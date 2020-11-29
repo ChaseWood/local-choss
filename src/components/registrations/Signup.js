@@ -195,7 +195,7 @@ const Signup = (props) => {
 							className={classes.submit}>
 							Sign Up
 						</Button>
-						<Grid container justify='flex-end'>
+						<Grid container justify='flex-start'>
 							<Grid item>
 								<Link to='/login'>Already have an account? Sign in</Link>
 							</Grid>
@@ -205,9 +205,9 @@ const Signup = (props) => {
 				<div>
 					<div>{creds.errors ? handleErrors() : null}</div>
 				</div>
-				<Box mt={5}>
+				{/* <Box mt={5}>
 					<Copyright />
-				</Box>
+				</Box> */}
 			</Container>
 		</div>
 	);

@@ -196,9 +196,9 @@ const Login = (props) => {
 				<div>
 					<div>{creds.errors ? handleErrors() : null}</div>
 				</div>
-				<Box mt={8}>
+				{/* <Box mt={8}>
 					<Copyright />
-				</Box>
+				</Box> */}
 			</Container>
 		</div>
 	);
