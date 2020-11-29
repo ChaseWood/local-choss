@@ -5,10 +5,25 @@ import MapGL, { Marker, Popup } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import Icon from './marker/marker.png';
+import { makeStyles } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
+import RoomIcon from '@material-ui/icons/Room';
 
 const TOKEN = process.env.REACT_APP_TOKEN;
+const useStyles = makeStyles((theme) => ({
+	img: {
+		width: 30,
+		height: 45,
+	},
+	imgClicked: {
+		width: 30,
+		height: 45,
+		backgroundColor: 'red',
+	},
+}));
 
 const SearchableMap = (props) => {
+	const classes = useStyles();
 	const [viewport, setViewport] = useState({
 		latitude: 0,
 		longitude: 0,
@@ -66,11 +81,15 @@ const SearchableMap = (props) => {
 					{props.locations.latitude ? (
 						<Marker
 							offsetLeft={-20}
-							offsetTop={-20}
+							offsetTop={-50}
 							key={props.locations.latitude}
 							latitude={props.locations.latitude}
 							longitude={props.locations.longitude}>
-							<img src={Icon} alt='ICON' />
+							<RoomIcon
+								fontSize='large'
+								style={{ color: red[500], fontSize: 50 }}
+							/>
+							{/* <img className={classes.imgClicked} src={Icon} alt='ICON' /> */}
 						</Marker>
 					) : (
 						<div></div>
@@ -83,13 +102,23 @@ const SearchableMap = (props) => {
 									key={location.id}
 									latitude={location.latitude}
 									longitude={location.longitude}>
-									<img
-										onClick={() => {
-											setSelectedHotSpot(location);
-										}}
-										src={Icon}
-										alt='ICON'
-									/>
+									{props.showMarker.showMarker === true &&
+									props.showMarker.id === location.name ? (
+										<RoomIcon
+											onClick={() => {
+												setSelectedHotSpot(location);
+											}}
+											fontSize='large'
+											style={{ color: red[500], fontSize: 50 }}
+										/>
+									) : (
+										<RoomIcon
+											onClick={() => {
+												setSelectedHotSpot(location);
+											}}
+											fontSize='large'
+										/>
+									)}
 								</Marker>
 						  ))
 						: null}

@@ -74,6 +74,10 @@ export default function MapContainer(props) {
 	const classes = useStyles();
 	///////////////added states and functions/////////////
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [showMarker, setShowMarker] = React.useState({
+		showMarker: false,
+		id: null,
+	});
 	const open = Boolean(anchorEl);
 
 	// const url = 'http://localhost:3001';
@@ -250,7 +254,15 @@ export default function MapContainer(props) {
 						{props.climbs.routes
 							? props.climbs.routes.map((route) => (
 									<>
-										<ListItem button key={route.name}>
+										<ListItem
+											button
+											key={route.name}
+											onClick={() =>
+												setShowMarker({
+													showMarker: !showMarker.showMarker,
+													id: route.name,
+												})
+											}>
 											<Typography variant='body1' className={classes.routeText}>
 												{route.name}
 											</Typography>
@@ -295,6 +307,7 @@ export default function MapContainer(props) {
 					locations={props.locations}
 					setToDo={setToDo}
 					handleTickList={handleTickList}
+					showMarker={showMarker}
 				/>
 			</main>
 		</div>
